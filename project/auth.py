@@ -38,7 +38,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password') #Vulnerable
-    signup_query = text ('select * from user where email = user_email')
+    signup_query = text ('select * from user where email = :user_email')
     user = db.session.execute(signup_query, {'user_email' : email}).all()#Vulnerable 
     if len(user) > 0: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')  # 'flash' function stores a message accessible in the template code.
